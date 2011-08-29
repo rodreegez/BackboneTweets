@@ -33,7 +33,7 @@ var TweetsView = Backbone.View.extend({
         console.log('already displayed');
       }else{
         var tweetView = new TweetView({model:tweet});
-        $('#tweets-list').prepend(tweetView.render().el);
+        $(tweetView.render().el).hide().prependTo('#tweets-list').fadeIn('slow');
       }
     });
   }
