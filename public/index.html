@@ -7,10 +7,13 @@
 
 <h1>Backbone Tweets</h1>
 
-<ul id='tweets-list'></ul>
+<section id='tweets-list'></section>
 
 <script type='text/template' id='tweet-template'>
-  <li id=<%= id %>><%= text %></li>
+  <div id='<%= id %>'>
+    <h2>@<%= from_user %>:</h2>
+    <p class='text'><%= text %></p>
+  </div>
 </script>
 
 <script
