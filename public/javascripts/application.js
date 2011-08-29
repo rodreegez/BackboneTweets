@@ -26,19 +26,20 @@ var TweetView = Backbone.View.extend({
 
 var TweetsView = Backbone.View.extend({
   initialize: function() {
-    this.collection.bind('change', this.render, this);
-    this.collection.each(this.addTweet);
-  },
-
-  addTweet: function(tweet) {
-    var tweetView = new TweetView({model:tweet});
-    $('#tweets').append(tweetView.render().el);
+    this.collection.bind('reset', this.render, this);
+    var view = this;
+    this.collection.each(function(tweet) {
+      if ($('#' + tweet.id).length > 0) {
+        console.log('already displayed');
+      }else{
+        var tweetView = new TweetView({model:tweet});
+        $('#tweets-list').prepend(tweetView.render().el);
+      }
+    });
   }
 });
 
 setInterval(function() {
-  console.log('fetching...');
   tweets.fetch();
   var tweetsView = new TweetsView({collection: tweets});
-  console.log('fetched', tweets.length, 'tweets');
 }, 10000);
